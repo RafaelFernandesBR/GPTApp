@@ -17,6 +17,7 @@ public partial class MainPage : ContentPage
     private async void OnCounterClicked(object sender, EventArgs e)
     {
         string userInput = UserInputEntry.Text;
+        UserInputEntry.Unfocus();
 
         if (!string.IsNullOrEmpty(userInput))
         {
@@ -45,8 +46,16 @@ public partial class MainPage : ContentPage
 
             string response = await _openAiControl.GetSpeakAsync(itemsString);
             SemanticScreenReader.Announce(response);
-            ViewModel.MainPageViewModels.Add(new MainPageViewModel() { ListItems = response });
+
+            // Criar um novo objeto MainPageViewModel com a resposta e adicioná-lo à lista
+            MainPageViewModel responseViewModel = new MainPageViewModel() { ListItems = response };
+            ViewModel.MainPageViewModels.Add(responseViewModel);
         }
+    }
+
+    private async void OnClearList(object sender, EventArgs e)
+    {
+        ViewModel.MainPageViewModels.Clear();
     }
 
     private async void OnToolbarItemClicked(object sender, EventArgs e)
