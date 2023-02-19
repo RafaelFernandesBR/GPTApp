@@ -53,7 +53,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private async void OnClearList(object sender, EventArgs e)
+    private void OnClearList(object sender, EventArgs e)
     {
         ViewModel.MainPageViewModels.Clear();
     }
