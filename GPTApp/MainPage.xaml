@@ -12,7 +12,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView x:Name="MyList" ItemsSource="{Binding MainPageViewModels}" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always" Margin="0,10,0,0">
+        <ListView x:Name="MyList" ItemsSource="{Binding MainPageViewModels}" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always" Margin="0,10,0,0" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -35,13 +35,14 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="CenterAndExpand"
-                         VerticalOptions="Center"
-                         Margin="0,600,0,0">
-                       <Button Text="Limpar lista" Clicked="OnClearList" />
-                       <Editor x:Name="UserInputEntry"
-                       Placeholder="Digite aqui"
-                       WidthRequest="200" />
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="End"
+                         Margin="0,10,0,0">
+                <Button Text="Limpar lista" Clicked="OnClearList" />
+                <Editor x:Name="UserInputEntry"
+                        Placeholder="Digite aqui"
+                        WidthRequest="200"
+                        VerticalOptions="FillAndExpand"/>
                 <Button Text="Enviar" Clicked="OnCounterClicked" />
             </StackLayout>
         </Grid>
