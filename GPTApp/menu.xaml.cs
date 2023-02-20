@@ -15,7 +15,7 @@ public partial class menu : ContentPage
         // Mostra um alerta para o usuário com um campo de edição e botões OK e Cancelar
         tokenFile.Tokem = await DisplayPromptAsync("Token da API", "Digite o token da API", initialValue: tokenFile.Tokem);
 
-        if (!string.IsNullOrEmpty(token))
+        if (!string.IsNullOrEmpty(tokenFile.Tokem))
         {
             await Files.SaveState(tokenFile);
         }
