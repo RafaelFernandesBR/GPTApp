@@ -1,4 +1,5 @@
-﻿using OpenAI;
+﻿using GPTApp;
+using OpenAI;
 using OpenAI.Models;
 
 namespace Control;
@@ -9,8 +10,8 @@ public class OpenAiControl
     {
         try
         {
-            string tokenFile = await GPTApp.Files.ReadFile();
-            var api = new OpenAI.OpenAIClient(new OpenAIAuthentication(tokenFile));
+            var tokenFile = await GPTApp.Files.ReadState<UserData>();
+            var api = new OpenAI.OpenAIClient(new OpenAIAuthentication(tokenFile.Tokem));
             var result = await api.CompletionsEndpoint.CreateCompletionAsync(speak, temperature: 0.98, maxTokens: 3000, model: Model.Davinci);
             string n = result.ToString();
 

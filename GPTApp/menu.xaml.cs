@@ -11,13 +11,13 @@ public partial class menu : ContentPage
     {
         if (e.Item == null)
             return;
-        string tokenFile = await Files.ReadFile();
+        var tokenFile = await Files.ReadState<UserData>() ?? new UserData();
         // Mostra um alerta para o usuário com um campo de edição e botões OK e Cancelar
-        string token = await DisplayPromptAsync("Token da API", "Digite o token da API", initialValue: tokenFile);
+        tokenFile.Tokem = await DisplayPromptAsync("Token da API", "Digite o token da API", initialValue: tokenFile.Tokem);
 
         if (!string.IsNullOrEmpty(token))
         {
-            await Files.SaveState(token);
+            await Files.SaveState(tokenFile);
         }
 
         MenuList.SelectedItem = null;

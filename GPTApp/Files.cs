@@ -1,34 +1,34 @@
-﻿namespace GPTApp;
+﻿using Newtonsoft.Json;
+using System.IO;
+
+namespace GPTApp;
 public static class Files
 {
     private static string mainDir = FileSystem.Current.AppDataDirectory;
-    private static string fileName = "token.txt";
-    private static string filePath = System.IO.Path.Combine(mainDir, fileName);
+    private static string fileName = "data.json";
+    private static string filePath = Path.Combine(mainDir, fileName);
 
-    public static async Task SaveState(string str)
+    public static async Task SaveState(object data)
     {
-        using FileStream outputStream = System.IO.File.OpenWrite(filePath);
+        string json = JsonConvert.SerializeObject(data);
+        using FileStream outputStream = File.OpenWrite(filePath);
         using StreamWriter streamWriter = new StreamWriter(outputStream);
-
-        await streamWriter.WriteAsync(str);
+        await streamWriter.WriteAsync(json);
     }
 
-    public static async Task<string> ReadFile()
+    public static async Task<T> ReadState<T>()
     {
         try
         {
-            using Stream fileStream = System.IO.File.OpenRead(filePath);
+            using Stream fileStream = File.OpenRead(filePath);
             using StreamReader reader = new StreamReader(fileStream);
-
-            var c = await reader.ReadToEndAsync();
-
-            return c;
+            string json = await reader.ReadToEndAsync();
+            return JsonConvert.DeserializeObject<T>(json);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            return null;
+            // tratamento de erro
+            return default(T);
         }
-
-        return String.Empty;
     }
 }

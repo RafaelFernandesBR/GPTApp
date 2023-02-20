@@ -18,6 +18,12 @@ public partial class MainPage : ContentPage
     {
         string userInput = UserInputEntry.Text;
         UserInputEntry.Unfocus();
+        var tokenFile = await Files.ReadState<UserData>() ?? new UserData();
+        if (tokenFile.Tokem == null)
+        {
+            await DisplayAlert("Token da API", "Por favor, defina o token da API nas configurações.", "OK");
+            return;
+        }
 
         if (!string.IsNullOrEmpty(userInput))
         {
@@ -55,7 +61,12 @@ public partial class MainPage : ContentPage
 
     private void OnClearList(object sender, EventArgs e)
     {
-        ViewModel.MainPageViewModels.Clear();
+        if (ViewModel.MainPageViewModels.Count > 0)
+        {
+            ViewModel.MainPageViewModels.Clear();
+
+            Vibration.Default.Vibrate(20);
+        }
     }
 
     private async void OnToolbarItemClicked(object sender, EventArgs e)
