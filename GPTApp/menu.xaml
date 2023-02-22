@@ -1,20 +1,13 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GPTApp.menu"
              Title="Configurações">
     <StackLayout>
-        <ListView x:Name="MenuList" ItemTapped="OnMenuItemTapped">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="10,5">
-                            <Label Text="{Binding .}" VerticalOptions="Center" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Button Text="Definir Token" Clicked="OnDefineTokenClicked" />
+        <StackLayout Orientation="Horizontal" Margin="0,30,0,0">
+            <Label Text="Vibrar ao limpar a lista" VerticalOptions="Center"/>
+            <CheckBox x:Name="VibrationCheckbox" VerticalOptions="Center" Margin="10,0,0,0" 
+          CheckedChanged="OnVibrationCheckboxCheckedChanged" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>
-    

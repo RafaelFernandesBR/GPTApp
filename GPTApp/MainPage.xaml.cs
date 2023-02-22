@@ -18,8 +18,9 @@ public partial class MainPage : ContentPage
     {
         string userInput = UserInputEntry.Text;
         UserInputEntry.Unfocus();
-        var tokenFile = await Files.ReadState<UserData>() ?? new UserData();
-        if (tokenFile.Tokem == null)
+        string TokenUserApi = await SecureStorage.Default.GetAsync("token-api-user");
+
+        if (TokenUserApi == null)
         {
             await DisplayAlert("Token da API", "Por favor, defina o token da API nas configurações.", "OK");
             return;
@@ -63,9 +64,13 @@ public partial class MainPage : ContentPage
     {
         if (ViewModel.MainPageViewModels.Count > 0)
         {
+            bool vibrateClearList = Preferences.Default.Get("Vibration-Clear-List", true);
             ViewModel.MainPageViewModels.Clear();
 
-            Vibration.Default.Vibrate(20);
+            if (vibrateClearList)
+            {
+                Vibration.Default.Vibrate(20);
+            }
         }
     }
 
