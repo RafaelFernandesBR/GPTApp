@@ -18,7 +18,7 @@
 		<ApplicationIdGuid>efbe19f1-f947-4765-9bda-f1056d703424</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>2.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>2.4</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -61,8 +61,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-		<PackageReference Include="OpenAI-DotNet" Version="4.4.4" />
+		<PackageReference Include="OpenAI-DotNet" Version="6.8.0" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using GPTApp;
 using OpenAI;
+using OpenAI.Chat;
 using OpenAI.Models;
 
 namespace Control;
@@ -11,11 +12,16 @@ public class OpenAiControl
         try
         {
             string TokenUserApi = await SecureStorage.Default.GetAsync("token-api-user");
-            var api = new OpenAI.OpenAIClient(new OpenAIAuthentication(TokenUserApi));
-            var result = await api.CompletionsEndpoint.CreateCompletionAsync(speak, temperature: 0.98, maxTokens: 3000, model: Model.Davinci);
-            string n = result.ToString();
+            var api = new OpenAIClient(new OpenAIAuthentication(TokenUserApi));
 
-            return n;
+            var messages = new List<Message>
+{
+    new Message(Role.User, speak),
+};
+            var chatRequest = new ChatRequest(messages);
+            var resultChat = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
+
+            return resultChat.ToString();
         }
         catch (Exception ex)
         {
