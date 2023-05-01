@@ -1,7 +1,5 @@
-﻿using GPTApp;
-using OpenAI;
+﻿using OpenAI;
 using OpenAI.Chat;
-using OpenAI.Models;
 
 namespace Control;
 public class OpenAiControl
