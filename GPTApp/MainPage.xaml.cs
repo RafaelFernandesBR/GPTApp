@@ -31,27 +31,19 @@ public partial class MainPage : ContentPage
             ViewModel.MainPageViewModels.Add(new MainPageViewModel() { ListItems = userInput });
             UserInputEntry.Text = string.Empty;
 
-            string itemsString = null;
+            string response = null;
 
             if (ViewModel.MainPageViewModels.Count > 10)
             {
                 // obter apenas os últimos 10 itens da lista
                 var lastTenItems = ViewModel.MainPageViewModels.Skip(Math.Max(0, ViewModel.MainPageViewModels.Count - 10)).Take(10);
-
-                foreach (var item in lastTenItems)
-                {
-                    itemsString += item.ListItems + "\n";
-                }
+                response = await _openAiControl.GetSpeakAsync(lastTenItems);
             }
             else
             {
-                foreach (var item in ViewModel.MainPageViewModels)
-                {
-                    itemsString += item.ListItems + "\n";
-                }
+                response = await _openAiControl.GetSpeakAsync(ViewModel.MainPageViewModels);
             }
 
-            string response = await _openAiControl.GetSpeakAsync(itemsString);
             SemanticScreenReader.Announce(response);
 
             // Criar um novo objeto MainPageViewModel com a resposta e adicioná-lo à lista

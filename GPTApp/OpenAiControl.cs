@@ -1,30 +1,45 @@
-﻿using OpenAI;
+﻿using GPTApp;
+using OpenAI;
 using OpenAI.Chat;
 
 namespace Control;
 public class OpenAiControl
 {
 
-    public async Task<string> GetSpeakAsync(string speak)
+    public async Task<string> GetSpeakAsync(IEnumerable<MainPageViewModel> viewModels)
     {
         try
         {
             string TokenUserApi = await SecureStorage.Default.GetAsync("token-api-user");
             var api = new OpenAIClient(new OpenAIAuthentication(TokenUserApi));
 
-            var messages = new List<Message>
-{
-    new Message(Role.User, speak),
-};
+            var messages = AlternateRoles(viewModels);
             var chatRequest = new ChatRequest(messages);
             var resultChat = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
 
             return resultChat.ToString();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return "erro, tente novamente mais tarde.";
         }
 
     }
+
+    private List<Message> AlternateRoles(IEnumerable<MainPageViewModel> viewModels)
+    {
+        var result = new List<Message>();
+        var i = 0;
+
+        foreach (var viewModel in viewModels)
+        {
+            var role = i % 2 == 0 ? Role.User : Role.Assistant;
+            var newMessage = new Message(role, viewModel.ListItems);
+            result.Add(newMessage);
+            i++;
+        }
+
+        return result;
+    }
+
 }
