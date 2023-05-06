@@ -1,4 +1,5 @@
 ﻿using Control;
+using OpenAI.Chat;
 
 namespace GPTApp;
 public partial class MainPage : ContentPage
@@ -28,7 +29,7 @@ public partial class MainPage : ContentPage
 
         if (!string.IsNullOrEmpty(userInput))
         {
-            ViewModel.MainPageViewModels.Add(new MainPageViewModel() { ListItems = userInput });
+            ViewModel.MainPageViewModels.Add(new MainPageViewModel() { ListItems = userInput, role = Role.User });
             UserInputEntry.Text = string.Empty;
 
             string response = null;
@@ -47,7 +48,7 @@ public partial class MainPage : ContentPage
             SemanticScreenReader.Announce(response);
 
             // Criar um novo objeto MainPageViewModel com a resposta e adicioná-lo à lista
-            MainPageViewModel responseViewModel = new MainPageViewModel() { ListItems = response };
+            MainPageViewModel responseViewModel = new MainPageViewModel() { ListItems = response, role = Role.Assistant };
             ViewModel.MainPageViewModels.Add(responseViewModel);
         }
     }

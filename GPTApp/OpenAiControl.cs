@@ -33,8 +33,7 @@ public class OpenAiControl
 
         foreach (var viewModel in viewModels)
         {
-            var role = i % 2 == 0 ? Role.User : Role.Assistant;
-            var newMessage = new Message(role, viewModel.ListItems);
+            var newMessage = new Message(viewModel.role, viewModel.ListItems);
             result.Add(newMessage);
             i++;
         }
