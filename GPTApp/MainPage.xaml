@@ -44,6 +44,7 @@
                 <Button Text="Limpar lista" Clicked="OnClearList" />
                 <Editor x:Name="UserInputEntry"
                         Placeholder="Digite aqui"
+                        Keyboard="Chat"
                         WidthRequest="200"
                         VerticalOptions="FillAndExpand"/>
                 <Button Text="Enviar" Clicked="OnUserGetSpeak" />

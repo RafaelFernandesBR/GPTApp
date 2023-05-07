@@ -4,6 +4,7 @@
              Title="Configurações">
     <StackLayout>
         <Button Text="Definir Token" Clicked="OnDefineTokenClicked" />
+        <Button Text="Definir tamanho do histórico enviado" Clicked="OnDefineChatSizeClicked" />
         <StackLayout Orientation="Horizontal" Margin="0,30,0,0">
             <Label Text="Vibrar ao limpar a lista" VerticalOptions="Center"/>
             <CheckBox x:Name="VibrationCheckbox" VerticalOptions="Center" Margin="10,0,0,0" 

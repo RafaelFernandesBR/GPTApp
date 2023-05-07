@@ -20,6 +20,27 @@ public partial class menu : ContentPage
         }
     }
 
+    private async void OnDefineChatSizeClicked(object sender, EventArgs e)
+    {
+        string ChatSizeActual = Preferences.Default.Get("Chat-Size", 10).ToString();
+
+        // Mostra um alerta para o usuário com um campo de edição e botões OK e Cancelar
+        string ChatSize = await DisplayPromptAsync("Tamanho do chat", "Defina o tamanho da lista a ser enviada para o chat", keyboard: Keyboard.Telephone, initialValue: ChatSizeActual);
+
+        if (!string.IsNullOrEmpty(ChatSize))
+        {
+            bool isNumeric = int.TryParse(ChatSize, out int result);
+            if (isNumeric && result > 10)
+            {
+                Preferences.Default.Set("Chat-Size", result);
+            }
+            else
+            {
+                await DisplayAlert("Tamanho do chat inválido", "O tamanho do chat deve ser um número válido e maior que 10", "OK");
+            }
+        }
+    }
+
     private void OnVibrationCheckboxCheckedChanged(object sender, EventArgs e)
     {
         bool isChecked = VibrationCheckbox.IsChecked;

@@ -36,8 +36,10 @@ public partial class MainPage : ContentPage
 
             if (ViewModel.MainPageViewModels.Count > 10)
             {
-                // obter apenas os últimos 10 itens da lista
-                var lastTenItems = ViewModel.MainPageViewModels.Skip(Math.Max(0, ViewModel.MainPageViewModels.Count - 10)).Take(10);
+                //obter apenas os últimos 10 itens da lista, ou o que o usuário definir como tamanho
+                int ChatSize = Preferences.Default.Get("Chat-Size", 10);
+
+                var lastTenItems = ViewModel.MainPageViewModels.Skip(Math.Max(0, ViewModel.MainPageViewModels.Count - ChatSize)).Take(ChatSize);
                 response = await _openAiControl.GetSpeakAsync(lastTenItems);
             }
             else
