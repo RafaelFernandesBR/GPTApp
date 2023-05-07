@@ -1,6 +1,5 @@
 ﻿using Control;
 using OpenAI.Chat;
-using static Android.App.LauncherActivity;
 
 namespace GPTApp;
 public partial class MainPage : ContentPage
