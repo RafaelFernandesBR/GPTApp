@@ -12,7 +12,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView x:Name="MyList" ItemsSource="{Binding MainPageViewModels}" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always" Margin="0,10,0,0" HasUnevenRows="True">
+        <ListView x:Name="MyList" ItemsSource="{Binding MainPageViewModels}" ItemTapped="OnItemClicked" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always" Margin="0,10,0,0" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

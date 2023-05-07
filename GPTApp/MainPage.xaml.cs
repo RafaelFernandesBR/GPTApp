@@ -1,5 +1,6 @@
 ﻿using Control;
 using OpenAI.Chat;
+using static Android.App.LauncherActivity;
 
 namespace GPTApp;
 public partial class MainPage : ContentPage
@@ -63,6 +64,21 @@ public partial class MainPage : ContentPage
             if (vibrateClearList)
             {
                 Vibration.Default.Vibrate(20);
+            }
+        }
+    }
+
+    private async void OnItemClicked(object sender, EventArgs e)
+    {
+        var listView = sender as ListView;
+        var selectedItem = listView.SelectedItem as MainPageViewModel;
+        if (selectedItem != null)
+        {
+            string action = await DisplayActionSheet("Quer copiar o item?", "Cancelar", null, "Copiar item");
+            if (action == "Copiar item")
+            {
+                await Clipboard.Default.SetTextAsync(selectedItem.ListItems);
+                SemanticScreenReader.Announce("Item copiado!");
             }
         }
     }
