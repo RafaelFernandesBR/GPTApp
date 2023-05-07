@@ -29,13 +29,11 @@ public class OpenAiControl
     private List<Message> AlternateRoles(IEnumerable<MainPageViewModel> viewModels)
     {
         var result = new List<Message>();
-        var i = 0;
 
         foreach (var viewModel in viewModels)
         {
             var newMessage = new Message(viewModel.role, viewModel.ListItems);
             result.Add(newMessage);
-            i++;
         }
 
         return result;
