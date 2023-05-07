@@ -46,7 +46,7 @@
                         Placeholder="Digite aqui"
                         WidthRequest="200"
                         VerticalOptions="FillAndExpand"/>
-                <Button Text="Enviar" Clicked="OnCounterClicked" />
+                <Button Text="Enviar" Clicked="OnUserGetSpeak" />
             </StackLayout>
         </Grid>
     </Grid>

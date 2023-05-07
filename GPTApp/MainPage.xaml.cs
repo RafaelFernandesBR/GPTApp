@@ -16,7 +16,7 @@ public partial class MainPage : ContentPage
         _openAiControl = new OpenAiControl();
     }
 
-    private async void OnCounterClicked(object sender, EventArgs e)
+    private async void OnUserGetSpeak(object sender, EventArgs e)
     {
         string userInput = UserInputEntry.Text;
         UserInputEntry.Unfocus();
