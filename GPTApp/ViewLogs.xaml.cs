@@ -14,7 +14,10 @@ public partial class ViewLogs : ContentPage
         var logsLabel = (Label)FindByName("logs");
 
         if (string.IsNullOrEmpty(logText))
+        {
             await Clipboard.Default.SetTextAsync(logText);
+            SemanticScreenReader.Announce("Copiado!");
+        }
     }
 
     private async void OnClearLogsClicked(object sender, EventArgs e)
@@ -23,7 +26,12 @@ public partial class ViewLogs : ContentPage
 
         if (File.Exists(logFilePath))
         {
+            var logsLabel = (Label)FindByName("logs");
+
             File.Delete(logFilePath);
+            SemanticScreenReader.Announce("Logs limpos");
+
+            logsLabel.Text = null;
         }
     }
 
