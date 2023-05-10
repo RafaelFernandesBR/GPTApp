@@ -1,18 +1,21 @@
 ﻿using Control;
 using OpenAI.Chat;
+using Serilog;
 
 namespace GPTApp;
 public partial class MainPage : ContentPage
 {
     public MainPageViewModel ViewModel { get; set; }
     private OpenAiControl _openAiControl;
+    private readonly ILogger _logger;
 
     public MainPage()
     {
+        _logger = LoggerConfig.CreateLogger();
         InitializeComponent();
         ViewModel = new MainPageViewModel();
         BindingContext = ViewModel;
-        _openAiControl = new OpenAiControl();
+        _openAiControl = new OpenAiControl(_logger);
     }
 
     private async void OnUserGetSpeak(object sender, EventArgs e)

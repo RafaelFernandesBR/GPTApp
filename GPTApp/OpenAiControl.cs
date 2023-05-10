@@ -1,10 +1,17 @@
 ﻿using GPTApp;
 using OpenAI;
 using OpenAI.Chat;
+using Serilog;
 
 namespace Control;
 public class OpenAiControl
 {
+    private readonly ILogger _logger;
+
+    public OpenAiControl(ILogger logger)
+    {
+        _logger = logger;
+    }
 
     public async Task<string> GetSpeakAsync(IEnumerable<MainPageViewModel> viewModels)
     {
@@ -19,8 +26,9 @@ public class OpenAiControl
 
             return resultChat.ToString();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            _logger.Error(ex.ToString());
             return "erro, tente novamente mais tarde.";
         }
 
