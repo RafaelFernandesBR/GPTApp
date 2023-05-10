@@ -1,12 +1,36 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GPTApp.ViewLogs"
              Title="ViewLogs">
 
-    <VerticalStackLayout>
-        <Label x:Name="logs"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="2">
+            <Label x:Name="logs"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <Button Grid.Row="1" Grid.Column="0"
+                Text="Copiar logs"
+                Clicked="OnCopyLogsClicked"
+                HorizontalOptions="EndAndExpand"
+                VerticalOptions="EndAndExpand" />
+
+        <Button Grid.Row="1" Grid.Column="1"
+                Text="Apagar logs"
+                Clicked="OnClearLogsClicked"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="EndAndExpand" />
+    </Grid>
+
 </ContentPage>
