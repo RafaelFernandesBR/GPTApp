@@ -8,9 +8,35 @@ public partial class ViewLogs : ContentPage
         DefineLogs();
     }
 
+    private async void OnCopyLogsClicked(object sender, EventArgs e)
+    {
+        string logText = GetLogsFile();
+        var logsLabel = (Label)FindByName("logs");
+
+        if (string.IsNullOrEmpty(logText))
+            await Clipboard.Default.SetTextAsync(logText);
+    }
+
+    private async void OnClearLogsClicked(object sender, EventArgs e)
+    {
+        string logFilePath = Path.Combine(FileSystem.AppDataDirectory, "gpt-android.log");
+
+        if (File.Exists(logFilePath))
+        {
+            File.Delete(logFilePath);
+        }
+    }
+
     private void DefineLogs()
     {
+        string logText = GetLogsFile();
         var logsLabel = (Label)FindByName("logs");
+
+        logsLabel.Text = logText;
+    }
+
+    private string GetLogsFile()
+    {
         string logFilePath = Path.Combine(FileSystem.AppDataDirectory, "gpt-android.log");
 
         // Verifica se o arquivo de log existe antes de tentar abri-lo
@@ -18,8 +44,10 @@ public partial class ViewLogs : ContentPage
         {
             // Lê o conteúdo do arquivo de log e salva em uma string
             string logText = File.ReadAllText(logFilePath);
-            logsLabel.Text = logText;
+            return logText;
         }
+
+        return null;
     }
 
 }
