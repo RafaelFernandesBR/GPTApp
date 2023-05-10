@@ -10,5 +10,6 @@
             <CheckBox x:Name="VibrationCheckbox" VerticalOptions="Center" Margin="10,0,0,0" 
           CheckedChanged="OnVibrationCheckboxCheckedChanged" />
         </StackLayout>
+        <Button Text="Visualizar logs de erros" Clicked="OnViewLogsClicked" />
     </StackLayout>
 </ContentPage>

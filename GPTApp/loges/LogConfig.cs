@@ -8,10 +8,9 @@ public static class LoggerConfig
         var file = Path.Combine(FileSystem.AppDataDirectory, "gpt-android.log");
 
         return new LoggerConfiguration()
-        .MinimumLevel.Verbose()
-        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+        .MinimumLevel.Debug()
         .Enrich.FromLogContext()
-        .WriteTo.File(file, encoding: System.Text.Encoding.UTF8, retainedFileCountLimit: 22)
+        .WriteTo.File(file, encoding: System.Text.Encoding.UTF8)
         .CreateLogger();
     }
 }

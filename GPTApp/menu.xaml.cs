@@ -41,6 +41,11 @@ public partial class menu : ContentPage
         }
     }
 
+    private async void OnViewLogsClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ViewLogs());
+    }
+
     private void OnVibrationCheckboxCheckedChanged(object sender, EventArgs e)
     {
         bool isChecked = VibrationCheckbox.IsChecked;
