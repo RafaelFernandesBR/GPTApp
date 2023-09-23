@@ -78,12 +78,38 @@ public partial class MainPage : ContentPage
         var selectedItem = listView.SelectedItem as MainPageViewModel;
         if (selectedItem != null)
         {
-            string action = await DisplayActionSheet("Quer copiar o item?", "Cancelar", null, "Copiar item");
+            string action = await DisplayActionSheet("Opções", "Cancelar", null, "Copiar item", "Editar item");
             if (action == "Copiar item")
             {
                 await Clipboard.Default.SetTextAsync(selectedItem.ListItems);
                 SemanticScreenReader.Announce("Item copiado!");
             }
+            else if (action == "Editar item")
+            {
+                // Aqui você pode adicionar a lógica para editar o item selecionado
+                // Pode abrir uma nova página para edição ou exibir um diálogo, por exemplo
+                EditItem(selectedItem);
+            }
+        }
+    }
+
+    private async void EditItem(MainPageViewModel selectedItem)
+    {
+        // Encontre o índice do item na lista
+        int selectedIndex = ViewModel.MainPageViewModels.IndexOf(selectedItem);
+
+        // Exibir um diálogo de edição com um campo de texto
+        string editedText = await DisplayPromptAsync("Editar item", "Digite o novo texto", initialValue: selectedItem.ListItems);
+
+        // Verificar se o diálogo foi confirmado ou cancelado
+        if (editedText != null)
+        {
+            // Atualizar o texto do item na lista
+            ViewModel.MainPageViewModels[selectedIndex].ListItems = editedText;
+
+            // Forçar uma atualização da ListView
+            MyList.ItemsSource = null;
+            MyList.ItemsSource = ViewModel.MainPageViewModels;
         }
     }
 
